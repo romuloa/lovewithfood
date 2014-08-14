@@ -1,0 +1,23 @@
+{
+  "name": "ilovefoodcart",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.2.22",
+    "foundation": "~5.3.3",
+    "jquery": "~2.1.1",
+    "modernizr": "~2.8.3"
+  },
+  "homepage": "https://github.com/romuloa/lovewithfood",
+  "authors": [
+    "romuloa <romulo.aguilar@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
