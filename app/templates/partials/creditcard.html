@@ -1,0 +1,69 @@
+<fieldset>
+	<legend>Credit Card Details</legend>
+	<div class="row">
+		<div class="large-8 medium-8 columns">
+
+			<label ng-class="{error: paymentForm.card_number.$invalid && !paymentForm.card_number.$pristine}">Card Number
+				<input type="text"
+								name="card_number"
+								ng-model="paymentInfo.card_number"
+								required
+								credit-card-type
+								ng-pattern="/^[0-9]+$/"
+								ng-minlength="15"
+								ng-maxlength="19"
+								ng-focus />
+
+				<ul class="error"  ng-if="paymentForm.card_number.$dirty && paymentForm.card_number.$invalid && !paymentForm.card_number.$focused">
+					<li class="help-block" ng-show="paymentForm.card_number.$error.minlength || paymentForm.card_number.$error.maxlength">Credit card must be 15-19 digits</li>
+					<li class="help-block" ng-show="paymentForm.card_number.$error.pattern">Credit card must consist of only numbers</li>
+					<li class="help-block" ng-show="paymentForm.card_number.$error.invalid">Invalid Amex, Visa, Discover, or Master Card</li>
+					<li class="help-block" ng-show="paymentForm.card_number.$error.required">Credit card required</li>
+				</ul>
+			</label>
+		</div>
+		<div class="large-4 medium-4 columns end">
+			<label ng-class="{error: paymentForm.cvv.$invalid && !paymentForm.cvv.$pristine}">Code (CVV)
+				<input type="text"
+								name="cvv"
+								ng-model="paymentInfo.cvv"
+								required
+								ng-pattern="/^[0-9]+$/"
+								ng-minlength="3"
+								ng-maxlength="4"
+								ng-focus />
+
+				<ul class="error"  ng-if="paymentForm.cvv.$dirty && paymentForm.cvv.$invalid && !paymentForm.cvv.$focused">
+					<li class="help-block" ng-show="paymentForm.cvv.$error.pattern">Security code must contain only numbers</li>
+					<li class="help-block" ng-show="paymentForm.cvv.$error.minlength || paymentForm.$error.maxlength">Security code must be 3-4 digits</li>
+					<li class="help-block" ng-show="paymentForm.cvv.$error.required">Security code required</li>
+				</ul>
+			</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-12 medium-12 columns">
+			<label ng-class="{error: (paymentForm.exp_month.$invalid && !paymentForm.exp_month.$pristine) || (!paymentForm.exp_year.$pristine && paymentForm.exp_year.$invalid)}">Expiration Date
+				<div class="row">
+					<div class="large-8 medium-8 columns">
+						{# MONTH DROPDOWN #}
+						<select ng-model="paymentInfo.exp_month" name="exp_month" card-expiration required ng-focus>
+							<option disabled selected value="">Month</option>
+							<option ng-repeat="month in months" value="{% raw %}{{$index+1}}{% endraw %}" > {% raw %}{{$index+1}} - {{month}}{% endraw %}</li>
+						</select>
+					</div>
+					<div class="large-4 medium-4 columns end">
+						{# YEAR DROPDOWN #}
+						<select ng-model="paymentInfo.exp_year" name="exp_year" required ng-focus>
+							<option disabled selected value="">Year</option>
+							<option ng-repeat="year in [] | range:currentYear:currentYear+13">{% raw %}{{year}}{% endraw %}</li>
+						</select>
+					</div>
+				</div>
+				<ul class="error"  ng-if="(paymentForm.exp_month.$dirty && paymentForm.exp_month.$invalid && !paymentForm.exp_month.$focused) || (paymentForm.exp_year.$dirty && paymentForm.exp_year.$invalid && !paymentForm.exp_year.$focused) ">
+					<li  class="help-block" ng-show="paymentForm.exp_year.$error.required">Expiration year required</li>
+  								<li  class="help-block" ng-show="paymentForm.exp_month.$error.invalid">Provided expiration date is invalid</li>
+				</ul>
+			</label>
+		</div>
+</fieldset>

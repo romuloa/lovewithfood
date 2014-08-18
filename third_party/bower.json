@@ -6,7 +6,8 @@
     "angular": "~1.2.22",
     "foundation": "~5.3.3",
     "jquery": "~2.1.1",
-    "modernizr": "~2.8.3"
+    "modernizr": "~2.8.3",
+    "angular-cache": "~3.1.0"
   },
   "homepage": "https://github.com/romuloa/lovewithfood",
   "authors": [

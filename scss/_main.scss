@@ -1,0 +1,48 @@
+/* ---------->>> PAGES <<<-----------*/
+
+.container {
+	width: 100%;
+	margin: 0 auto;
+	min-height: 100%;
+	margin-bottom: -45px;
+	&:after {
+		content: "";
+		display: block;
+	}
+}
+.wrapper {
+	background-color: white;
+	box-shadow: 1px 1px 10px #ddd;
+	padding: rem-calc(20);
+	h1 {
+		color: $red;
+	}
+}
+
+fieldset {
+	border: none;
+	padding: 1.25rem 0 0 0;
+}
+label {
+	margin-bottom: 14px !important;
+	margin-bottom: 1rem !important;
+	@include font-size(14);
+}
+
+
+.payment, .confirmation {
+	position: relative;
+	padding-top: 75px;
+}
+
+.payment {
+	header {
+		padding-left: 0.9375rem;
+		padding-right: 0.9375rem;
+	}
+}
+.confirmation {
+	h1 {
+		margin-bottom: 0;
+	}
+}

@@ -1,0 +1,31 @@
+<!doctype html>
+<html class="no-js" lang="en" ng-app="lwf">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="A sample shopping cart for ILF">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>LWF - RJ Sample Checkout and Confirmation </title>
+	<link rel="stylesheet" href="/static/css/app.css{% if version_id %}?v={{ version_id }}{% endif %}">
+</head>
+<body data-version="{{ version }}" ng-cloak>
+	{% block layout_body %}
+		<div class="container" {% block angular_attributes %}{% endblock %}>
+
+			{% block layout_before_content %}
+				{% include "partials/masthead.html" with context %}
+			{% endblock %}
+
+			<main>
+				{% block layout_content %}
+				{% endblock %}
+			</main>
+			{% block layout_after_content %}{% endblock %}
+		</div>
+
+		<footer></footer>
+	{% endblock %}
+	<script src="/static/js/min/vendor.js{% if version_id %}?v={{ version_id }}{% endif %}"></script>
+	<script src="/static/js/min/scripts.js{% if version_id %}?v={{ version_id }}{% endif %}"></script>
+</body>
+</html>

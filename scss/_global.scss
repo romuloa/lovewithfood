@@ -1,0 +1,23 @@
+/**
+*
+* Global
+*
+**/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+html, body, button {
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+pre {
+  padding: 13px;
+}

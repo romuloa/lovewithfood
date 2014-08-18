@@ -1,0 +1,27 @@
+/**
+*
+* List
+*
+**/
+
+
+/*==========  LIST RESET  ==========*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.list--reset {
+  padding-left: 0;
+
+  li {
+    padding-left: 0;
+  }
+
+  &.list-links a::before,
+  & li::before {
+    display: none !important; // Fine to use !important when we are forcing an override
+  }
+}

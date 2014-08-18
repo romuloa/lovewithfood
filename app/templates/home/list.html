@@ -1,0 +1,83 @@
+{% extends "layouts/index.html" %}
+
+{% block angular_attributes %}ng-controller="HomeCtrl"  ng-init="init();" {% endblock %}
+
+{% block layout_content %}
+<section class="payment" ng-if="viewCheckout">
+
+		<div class="wrapper row">
+			<header><h1 class="type-display1">Checkout</h1></header>
+			<div class="large-5 columns">
+				<h3 class="type-title">Payment Options</h3>
+				<p class="type-subhead">We accept the following cards:</p>
+				<img src="/static/img/credit_cards.png" alt="Visa, Mastercard, American Express, Discover"/>
+			</div>
+			<div class="large-6 columns end">
+				<form name="paymentForm" ng-submit="submitPaymentForm(paymentForm.$valid)" novalidate>
+
+					{# CREDIT CARD INFORMATION #}
+					{% include "partials/creditcard.html" %}
+
+					{# BILLING #}
+					{% include "partials/billing.html" %}
+
+					{# SHIPPING ADDRESS #}
+					{% include "partials/shipping.html" %}
+
+					{# button #}
+
+					<div class="row btn-row">
+						<div class="large-6 medium-6 columns">
+							<button ng-disabled="paymentForm.$invalid" type="submit" class="btn type-button text-centered">Purchase Now</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+</section>
+
+<section class="confirmation" ng-if="viewConfirmation">
+	<div class="wrapper row collapse">
+	<header><h1 class="type-display1">Thank you</h1>
+			<p>Your order was placed successfully</p></header>
+		<div class="large-12 columns">
+			<h2 class="type-title">Order details</h2>
+			<aside class="panel">
+			{% raw %}
+			<p><strong class="type-subhead">Card Details</strong>
+			<ul>
+				<li>Card Type: {{ paymentInfo.type }}</li>
+				<li>Card number: XXXX-XXXX-XXXX-{{ paymentInfo.card_number | limitTo : -4 }}</li>
+			</ul></p>
+
+			<p><strong class="type-subhead">Billing Details</strong>
+			<ul>
+				<li>Name: {{ paymentInfo.billing_name }}</li>
+				<li>Phone: {{ paymentInfo.billing_phone }}</li>
+				<li>Address: {{ paymentInfo.billing_address_1 }}</li>
+				<li>Address 2: {{ paymentInfo.billing_address_2 }}</li>
+				<li>City: {{ paymentInfo.billing_city }}</li>
+				<li>State: {{ paymentInfo.billing_state }}</li>
+				<li>Zip: {{ paymentInfo.billing_zip }}</li>
+			</ul></p>
+
+			<p><strong class="type-subhead">Shipping Details</strong>
+			<ul>
+				<li>Name: {{ paymentInfo.shipping_name }}</li>
+				<li>Phone: {{ paymentInfo.shipping_phone }}</li>
+				<li>Address: {{ paymentInfo.shipping_address_1 }}</li>
+				<li>Address 2: {{ paymentInfo.shipping_address_2}}</li>
+				<li>City: {{ paymentInfo.shipping_city }}</li>
+				<li>State: {{ paymentInfo.shipping_state }}</li>
+				<li>Zip: {{ paymentInfo.shipping_zip }}</li>
+			</ul></p>
+			</ul>
+			{% endraw %}
+			</aside>
+		</div>
+	</div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+/**
+*
+* Utils
+*
+**/
+
+/*==========  VARIABLES  ==========*/
+
+
+// The base font size
+$base-font-size: 16;
+$base-line-height:  26;
+
+
+  // Defining animation easings
+  $animationEasing: cubic-bezier(0.455, 0.030, 0.515, 0.955) !default;
+
+
+
+/*==========  FUNCTIONS  ==========*/
+
+@function size($sizeValue: 16){
+  @return $sizeValue + rem;
+}
+
+/*==========  MIXINS  ==========*/
+
+@mixin font-size($size) {
+      font-size: 0px + $size;
+      font-size: 0rem + $size / $base-font-size;
+      line-height: ceil($size / $base-line-height) * ($base-line-height / $size);
+      margin-bottom: 0px + $base-line-height;
+      margin-bottom: ($base-line-height / $base-font-size) +rem;
+}
+
+  @mixin single-border($dir, $width, $type, $color) {
+  border-#{$dir}: $width $type $color;
+}
+
+@mixin border($width, $type, $color) {
+  border: $width $type $color;
+}
+
+@mixin font-base($family, $weight) {
+  font-family: $family;
+  font-weight: $weight;
+}
+
+@mixin link-base($linkblue, $decoration, $cursor:"") {
+  color: $linkblue;
+  text-decoration: $decoration;
+  cursor: #{$cursor};
+}
+@mixin animate($duration:"", $delay:"", $count:"") {
+
+  -webkit-animation-duration: #{$duration};
+  -webkit-animation-delay: #{$delay};
+  -webkit-animation-iteration-count: #{$count};
+
+  -moz-animation-duration: #{$duration};
+  -moz-animation-delay: #{$delay};
+  -moz-animation-iteration-count: #{$count};
+
+  -o-animation-duration: #{$duration};
+  -o-animation-delay: #{$delay};
+  -o-animation-iteration-count: #{$count};
+
+  animation-duration: #{$duration};
+  animation-delay: #{$delay};
+  animation-iteration-count: #{$count};
+}
+
+@mixin bg-gradient($main-color, $secondary-color) {
+  background-color: $main-color;
+  background-image: -moz-linear-gradient(top,$secondary-color,$main-color);
+  background-image: -webkit-linear-gradient(top,$secondary-color,$main-color);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,$secondary-color),color-stop(1,$main-color));
+  background-image: linear-gradient(top,$secondary-color,$main-color);
+}
+
+@mixin bg-cover($image) {
+  background: url(#{$image}) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

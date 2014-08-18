@@ -1,0 +1,177 @@
+@import "_foundation-icons";
+
+$spritepath: "/static/img/icons/sprite.svg";
+
+
+@font-face {
+  font-family:"icons";
+  src:url("/static/img/icons/icons.eot");
+  src:url("/static/img/icons/icons.eot?#iefix") format("embedded-opentype"),
+    url("/static/img/icons/icons.woff2") format("woff2"),
+    url("/static/img/icons/icons.woff") format("woff"),
+    url("/static/img/icons/icons.ttf") format("truetype"),
+    url("/static/img/icons/icons.svg?#icons") format("svg");
+  font-weight:normal;
+  font-style:normal;
+}
+
+
+.icon {
+  font-family:"icons";
+  display:inline-block;
+  vertical-align:top;
+  line-height:1;
+  font-weight:normal;
+  font-style:normal;
+  speak:none;
+  text-decoration:inherit;
+  text-transform:none;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+
+// Icons
+$icon-bullet: "\e001";
+.icon-bullet::before {
+  content:"\e001";
+}
+
+$icon-chevron-down: "\e002";
+.icon-chevron-down::before {
+  content:"\e002";
+}
+
+$icon-chevron-large: "\e003";
+.icon-chevron-large::before {
+  content:"\e003";
+}
+
+$icon-chevron-left: "\e004";
+.icon-chevron-left::before {
+  content:"\e004";
+}
+
+$icon-chevron-right: "\e005";
+.icon-chevron-right::before {
+  content:"\e005";
+}
+
+$icon-chevron-up: "\e006";
+.icon-chevron-up::before {
+  content:"\e006";
+}
+
+$icon-close: "\e007";
+.icon-close::before {
+  content:"\e007";
+}
+
+$icon-cog: "\e008";
+.icon-cog::before {
+  content:"\e008";
+}
+
+$icon-diamond: "\e009";
+.icon-diamond::before {
+  content:"\e009";
+}
+
+$icon-exclamation: "\e00a";
+.icon-exclamation::before {
+  content:"\e00a";
+}
+
+$icon-google-dev: "\e00b";
+.icon-google-dev::before {
+  content:"\e00b";
+}
+
+$icon-hash: "\e00c";
+.icon-hash::before {
+  content:"\e00c";
+}
+
+$icon-introduction-to-media: "\e00d";
+.icon-introduction-to-media::before {
+  content:"\e00d";
+}
+
+$icon-lessons: "\e00e";
+.icon-lessons::before {
+  content:"\e00e";
+}
+
+$icon-menu: "\e00f";
+.icon-menu::before {
+  content:"\e00f";
+}
+
+$icon-minus: "\e010";
+.icon-minus::before {
+  content:"\e010";
+}
+
+$icon-multi-device-layouts: "\e011";
+.icon-multi-device-layouts::before {
+  content:"\e011";
+}
+
+$icon-performance: "\e012";
+.icon-performance::before {
+  content:"\e012";
+}
+
+$icon-plus: "\e013";
+.icon-plus::before {
+  content:"\e013";
+}
+
+$icon-question: "\e014";
+.icon-question::before {
+  content:"\e014";
+}
+
+$icon-slash: "\e015";
+.icon-slash::before {
+  content:"\e015";
+}
+
+$icon-star: "\e016";
+.icon-star::before {
+  content:"\e016";
+}
+
+$icon-tick: "\e017";
+.icon-tick::before {
+  content:"\e017";
+}
+
+$icon-user-input: "\e018";
+.icon-user-input::before {
+  content:"\e018";
+}
+
+.radiobutton_on.svg, .radiobutton_off.svg, .questionmark.svg, .bluearrow_up.svg, .bluearrow_down.svg, .icon_chromecast, .icon_goodies, .icon_buildrelationships, .icon_closedialog, .icon_sharetheknowledge { background: url("/static/img/icons/sprite.png"); }
+
+.radiobutton_on.svg, .radiobutton_off.svg, .questionmark.svg, .bluearrow_up.svg, .bluearrow_down.svg, .icon_chromecast, .icon_goodies, .icon_buildrelationships, .icon_closedialog, .icon_sharetheknowledge  { background-image: url("/static/img/icons/sprite.svg"); }
+
+.radiobutton_on.svg, .radiobutton_off.svg { width: 20px; height: 21px; }
+
+.bluearrow_up.svg, .bluearrow_down.svg { width: 12px; height: 8px; }
+
+//.lt-ie7 .icon_chromecast, .lt-ie7 .icon_goodies, .lt-ie7 .icon_buildrelationships, .lt-ie7 .icon_closedialog, .lt-ie7 .icon_sharetheknowledge { background-image: url($spritepath.gif); }
+
+.icon_chromecast, .icon_goodies, .icon_buildrelationships, .icon_sharetheknowledge { width: 50px; height: 51px; }
+
+.radiobutton_on.svg { background-position: -36px -440px; }
+.radiobutton_off.svg { background-position: -36px -404px; }
+.questionmark.svg { background-position: -36px -369px; width: 20px; height: 20px; }
+.bluearrow_up.svg { background-position: -40px -313px; }
+.bluearrow_down.svg { background-position: -40px -341px; }
+.icon_chromecast { background-position: -21px -16px; }
+.icon_goodies { background-position: -21px -81px; }
+.icon_buildrelationships { background-position: -21px -147px; }
+.icon_closedialog { background-position: -38px -278px; width: 16px; height: 16px; }
+.icon_sharetheknowledge { background-position: -21px -213px; }

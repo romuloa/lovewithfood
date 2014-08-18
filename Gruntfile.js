@@ -1,233 +1,96 @@
+'use strict';
+
 module.exports = function(grunt) {
+  // load all grunt tasks
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-	'use strict';
-	/* jshint camelcase: false */
+  /**
+   * Set path variables for the files we want to include in the build
+   */
+  var appConfigVars = {
+    bowerSource: 'third_party/bower_components',
+    source: 'js',
+    target: 'app/static/js'
+  };
 
-	// load all grunt tasks
-	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    appConfig: appConfigVars,
 
-  // Set path variables for the files we want to include in the build
-	var appConfigVars = {
-		bowerSource: 'third_party/bower_components',
-		thirdPartyJs: 'third_party/js',
-		source: 'js',
-		templates: 'templates',
-		css: 'static/css',
-		py: 'src'
-	};
+    /**
+     * Watch for changes to all Javascript files that aren't in the 'min' folder.
+     * 'min' is where minified/concatenated files will be placed.
+     */
+    watch: {
+      scripts: {
+        files: [
+          '<%= appConfig.source %>/{,*/}*.js',
+          '!<%= appConfig.source %>/min/*'
+        ],
+        tasks: ['build']
+      }
+    },
 
-	// The target directory for the final build product.
-	var targetDirectory = 'out';
+    /**
+     * Concatenate Javascript files.
+     * Combine all 3rd party Javascript into a min/vendor.js file.
+     * Combine all custom Javascript into a min/scripts.js file
+     */
+    concat: {
+      dist: {
+        files: [
+          {dest: '<%= appConfig.target %>/min/vendor.js', src: [
+           '<%= appConfig.bowerSource %>/jquery/dist/jquery.js',
+           '<%= appConfig.bowerSource %>/angular/angular.js',
+           '<%= appConfig.bowerSource %>/angular-cache/dist/angular-cache.js'
+          ]},
 
-	grunt.initConfig({
+          {dest: '<%= appConfig.target %>/min/scripts.js', src: [
+            '<%= appConfig.source %>/app.js',
+            '<%= appConfig.source %>/controllers/{,*/}*.js',
+              '<%= appConfig.source %>/directives/{,*/}*.js',
+              '<%= appConfig.source %>/filters/{,*/}*.js',
+              '<%= appConfig.source %>/services/{,*/}*.js'
+          ]}
+        ]
+      }
+    },
 
-		appConfig: appConfigVars,
+    /**
+     * Minify the concatenated vendor.js and scripts.js into vendor.min.js and scripts.min.js files.
+     */
+    uglify: {
+      dist: {
+        files: [
+          {dest: '<%= appConfig.target %>/min/vendor.min.js', src: ['<%= appConfig.target %>/min/vendor.js']},
+          {dest: '<%= appConfig.target %>/min/scripts.min.js', src: ['<%= appConfig.target %>/min/scripts.js']}
+        ]
+      }
+    },
 
-		appengine: {
-			app: {
-				root: targetDirectory,
-				manageScript: [process.env.HOME,
-	                     'bin', 'google_appengine', 'appcfg.py'].join('/'),
-				runFlags: {
-					port: 8080,
-					enable_sendmail:  'yes'
-				},
-				runScript: [process.env.HOME,
-	                  'bin', 'google_appengine', 'dev_appserver.py'].join('/')
-			}
-		},
+  });
 
-		build: grunt.file.readJSON('config.json'),
+  /**
+   * Define the watcher command. Invoke in your command line by typing:
+   * grunt watcher
+   */
+  grunt.registerTask('watcher',[
+    'watch'
+  ]);
 
-		// Empty out directory
-		clean: [targetDirectory],
+  /**
+   * Define the build command. Invoke in your command line by typing:
+   * grunt build
+   *
+   * Note: If you're already running 'grunt watcher' you don't need to run this command.
+   */
+  grunt.registerTask('build', [
+    'concat',
+    'uglify'
+  ]);
 
-		/**
-		 * Concatenate Javascript files.
-		 * Combine all 3rd party Javascript into a min/vendor.js file.
-		 * Combine all custom Javascript into a min/scripts.js file
-		 */
-		concat: {
-			dist: {
-				files: [
-					{
-						dest: '<%= appConfig.source %>/build/vendor.js',
-						src: [
-							'<%= appConfig.bowerSource %>/jquery/dist/jquery.js',
-							'<%= appConfig.bowerSource %>/angular/angular.js'
-						]
-					},
-					{
-						dest: '<%= appConfig.source %>/build/scripts.js',
-						src: [
-							'<%= appConfig.source %>/app.js',
-							'<%= appConfig.source %>/controllers/{,*/}*.js',
-							'<%= appConfig.source %>/directives/{,*/}*.js',
-							'<%= appConfig.source %>/filters/{,*/}*.js',
-							'<%= appConfig.source %>/services/{,*/}*.js'
-						]
-					}
-				]
-			}
-		},
-
-		/**
-		* Copies items into the out folder
-		*/
-		copy: {
-			source: {
-				cwd: 'src/',
-				dest: [targetDirectory, ''].join('/'),
-				expand: true,
-				src: '**'
-			},
-			js: {
-				cwd: ['js', 'build', ''].join('/'),
-				dest: [targetDirectory, 'static', 'js', ''].join('/'),
-				expand: true,
-				src: '**'
-			},
-			third_party_js: {
-				cwd: ['third_party', 'js', ''].join('/'),
-				expand: true,
-				dest: [targetDirectory, 'static', 'js', ''].join('/'),
-				src: [
-					'google-analytics.js'
-				]
-			},
-			static: {
-				cwd: 'static',
-				dest: [targetDirectory, 'static', ''].join('/'),
-				expand: true,
-				src: '**'
-			},
-			templates: {
-				cwd: 'templates',
-				dest: [targetDirectory, 'templates', ''].join('/'),
-				expand: true,
-				src: '**'
-			},
-			third_party_py: {
-				cwd: ['third_party', 'py'].join('/'),
-				dest: [targetDirectory, ''].join('/'),
-				expand: true,
-				src: '**'
-			}
-		},
-
-		/**
-		 * Runs files through jshint to look for syntax errors.
-		 * This isn't being used right now.
-		 */
-		jshint: {
-			options: {
-				jshintrc: '.jshintrc',
-				ignores: [
-					'<%= appConfig.source %>/min/*.js'
-				]
-			},
-			all: [
-				'Gruntfile.js',
-				'<%= yeoman.web %>/js/{,*/}*.js'
-			]
-		},
-
-		pkg: grunt.file.readJSON('package.json'),
-
-		/**
-		 * Minify the concatenated vendor.js and scripts.js into vendor.min.js and scripts.min.js files.
-		 */
-		uglify: {
-			dist: {
-				files: [
-					{dest: '<%= appConfig.source %>/build/vendor.min.js', src: ['<%= appConfig.source %>/build/vendor.js']},
-					{dest: '<%= appConfig.source %>/build/scripts.min.js', src: ['<%= appConfig.source %>/build/scripts.js']}
-				]
-			}
-		},
-
-		/**
-		 * Poll for changes in html, css, js, tpl, and py  files
-		 */
-		watch: {
-			scripts: {
-				files: [
-					'<%= appConfig.source %>/{,*/}*.js',
-					'!<%= appConfig.source %>/build/*'
-				],
-				tasks: ['js']
-			},
-			html: {
-				files: [
-					'<%= appConfig.templates %>/{,*/}*.html',
-					'<%= appConfig.templates %>/{,*/}*.tpl'
-				],
-				tasks: ['html']
-			},
-			css: {
-				files: [
-					'<%= appConfig.css %>/{,*/}*.css'
-				],
-				tasks:['css']
-			},
-			py: {
-				files: [
-					'<%= appConfig.py %>/{,*/}*.py',
-					'<%= appConfig.l10n %>/{,*/}*.arb',
-					'<%= appConfig.l10n %>/{,*/}*.json'
-				],
-				tasks: ['py']
-			}
-		},
-
-	});
-
-	grunt.loadNpmTasks('grunt-appengine');
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-copy');
-
-	grunt.registerTask('nop', function() {});
-
-	grunt.registerTask('js', [
-		'concat',
-		'uglify',
-		'copy:js',
-		'copy:third_party_js'
-	]);
-
-	grunt.registerTask('css', [
-		'copy:static'
-	]);
-
-	grunt.registerTask('html', [
-		'copy:templates'
-	]);
-
-	grunt.registerTask('py', [
-		'copy:source',
-		'copy:third_party_py'
-	]);
-
-
-	/**
-	 * Define the watcher command. Invoke in your command line by typing:
-	 * grunt watcher
-	 */
-	grunt.registerTask('watcher', [
-		'watch'
-	]);
-
-
-
-	grunt.registerTask('default', [
-		'concat',
-		'uglify',
-		'copy:source',
-		'copy:js',
-		'copy:third_party_js',
-		'copy:static',
-		'copy:templates',
-		'copy:third_party_py'
-	]);
+  /**
+   * If you simply type 'grunt' in your command line, it will run the 'grunt build' command.
+   */
+  grunt.registerTask('default', ['build']);
 };
-

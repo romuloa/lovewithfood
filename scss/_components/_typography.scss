@@ -1,0 +1,71 @@
+/**
+*
+* Typography
+*
+**/
+
+$family: 'Roboto', Arial, sans-serif;
+$light: 300;
+$normal: 400;
+$medium: 500;
+
+.type-display4 {
+   @include font-size(112);
+    @include font-base($family, $light);
+}
+.type-display3 {
+    @include font-size(56);
+    @include font-base($family, $normal);
+}
+.type-display2 {
+    @include font-size(45);
+    @include font-base($family, $normal);
+}
+.type-display1 {
+    @include font-size(34);
+    @include font-base($family, $normal);
+}
+.type-headline {
+    @include font-size(24);
+    @include font-base($family, $normal);
+}
+.type-title {
+    @include font-size(20);
+    @include font-base($family, $medium );
+}
+.type-subhead {
+    @include font-size(15);
+    @include font-base($family, $medium);
+}
+.type-caption {
+    @include font-size(12);
+    @include font-base($family, $normal );
+}
+.type-menu {
+    @include font-size(13);
+    @include font-base($family, $medium );
+}
+.type-button {
+    font-size: rem-calc(14);
+    @include font-base($family, $medium );
+    text-transform: uppercase;
+}
+.type-body2 {
+    @include font-size(13);
+    @include font-base($family, $medium );
+}
+.type-body1 {
+    @include font-size(13);
+    @include font-base($family, $normal );
+}
+
+p {
+    @extend .type-body1;
+}
+
+ul {
+    li {
+        @extend .type-body1;
+        margin-bottom: rem-calc(13);
+    }
+}

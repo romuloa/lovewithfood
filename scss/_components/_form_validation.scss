@@ -1,0 +1,45 @@
+/* ---------->>> FORM VALIDATION <<<-----------*/
+
+input {
+    margin-bottom: 0 !important;
+}
+label.error {
+    color: #4d4d4d;
+}
+select {
+    line-height: rem-calc(16);
+}
+@-moz-document url-prefix() {
+   select.ff {
+       background-image: none !important;
+   }
+}
+.asterik {
+    color: red;
+    font-weight:700;
+}
+
+.formset {
+    border: 2px solid white;
+    .postfix {
+        font-size: emCalc(20);
+        font-weight: 400;
+        height: 49px;
+        border-radius: 0;
+        -moz-border-radius: 0;
+        -webkit-border-radius: 0;
+    }
+}
+.help-block {
+    padding: 0px 0 0 5px;
+    color: white;
+    &.back {
+        margin-top: -.75em;
+    }
+}
+
+.help-block {
+    margin-bottom: 0;
+    color: $red;
+    @extend .type-body1;
+}

@@ -1,0 +1,44 @@
+/**
+*
+* Button
+*
+**/
+
+.btn {
+  @extend .button;
+  display: inline-block;
+  padding: (($base-line-height / 2) - 1)+ px 32px;
+  margin-bottom: $base-line-height / 2 + px ;
+  margin-top: $base-line-height / 2 + px ;
+  min-height: $base-line-height + px;
+  text-align: center;
+  font-weight: 600;
+  text-decoration: none;
+  outline: 0;
+  transition: none;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px 2px 4px, rgba(0, 0, 0, 0.17) 0px 0px 3px;
+
+  &.reverse {
+    background-color: white;
+    color: $red;
+    &:hover {
+      background-color: white;
+      text-decoration: none;
+    }
+    &.gray {
+      color: $secondary_text;
+    }
+  }
+  &:focus {
+    background-color: $red_dark;
+  }
+
+  &:hover {
+    background-color: $red_dark;
+    text-decoration: none;
+  }
+}

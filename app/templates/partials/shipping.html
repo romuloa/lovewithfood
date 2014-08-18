@@ -1,0 +1,138 @@
+<fieldset ng-if="!paymentInfo.sameBilling">
+	<legend>Shipping Details</legend>
+	<div class="row">
+		<div class="large-12 medium-12 columns">
+			{# NAME #}
+			<label ng-class="{error: paymentForm.shipping_name.$invalid && !paymentForm.shipping_name.$pristine}">Name
+				<input type="text"
+								name="shipping_name"
+								ng-model="paymentInfo.shipping_name"
+								required
+								ng-minlength="2"
+								ng-maxlength="50"
+								ng-focus/>
+
+				<ul class="error"  ng-if="paymentForm.shipping_name.$dirty && paymentForm.shipping_name.$invalid && !paymentForm.shipping_name.$focused">
+					<li class="help-block"  ng-show="paymentForm.shipping_name.$error.required">Name on card is required</li>
+		    		<li class="help-block"  ng-show="paymentForm.shipping_name.$error.maxlength || paymentForm.shipping_name.$error.minlength">Name on card must be between 2-50 characters in length</li>
+				</ul>
+			</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-12 medium-12 columns">
+			{# ADDRESS #}
+			<label ng-class="{error: paymentForm.shipping_address_1.$invalid && !paymentForm.shipping_address_1.$pristine}">Address
+				<input type="text"
+								name="shipping_address_1"
+								ng-focus
+								ng-maxlength="100"
+								ng-minlength="3"
+								ng-model="paymentInfo.shipping_address_1"
+								required />
+
+				<ul class="error"  ng-if="paymentForm.shipping_address_1.$dirty && paymentForm.shipping_address_1.$invalid && !paymentForm.shipping_address_1.$focused ">
+					<li class="help-block"  ng-show="paymentForm.shipping_address_1.$error.required">Address required</li>
+				    <li class="help-block"  ng-show="paymentForm.shipping_address_1.$error.maxlength || paymentForm.shipping_address_1.$error.minlength ">Address must be between 3-100 characters in length</li>
+			    </ul>
+			</label>
+	</div>
+	</div>
+	<div class="row">
+		<div class="large-12 medium-12 columns">
+			{# ADDRESS 2 #}
+			<label>Address 2 <span class="type-caption">(Apt, Suite, Unit)</span>
+				<input type="text"
+								name="shipping_address_2"
+								ng-focus
+								ng-maxlength="100"
+								ng-minlength="1"
+								ng-model="paymentInfo.shipping_address_2" />
+
+				<ul class="error"  ng-if="paymentForm.shipping_address_2.$dirty && paymentForm.shipping_address_2.$invalid && !paymentForm.shipping_address_2.$focused ">
+			    <li class="help-block"  ng-show="paymentForm.shipping_address_2.$error.maxlength">Address must be between 1-100 characters in length</li>
+				</ul>
+			</label>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="large-4 medium-4 columns">
+			{# CITY #}
+			<label ng-class="{error: (paymentForm.shipping_city.$invalid && !paymentForm.shipping_city.$pristine)}">City
+				<input type="text"
+								name="shipping_city"
+								ng-focus
+								ng-model="paymentInfo.shipping_city"
+								ng-maxlength="20"
+								ng-minlength="2"
+								required />
+
+				<ul class="error"  ng-if="paymentForm.shipping_city.$dirty && paymentForm.shipping_city.$invalid && !paymentForm.shipping_city.$focused">
+					<li class="help-block"  ng-show="paymentForm.shipping_city.$error.required">City required</li>
+				    <li class="help-block"  ng-show="paymentForm.shipping_city.$error.minlength">City must be greater than 2 characters</li>
+				    <li class="help-block"  ng-show="paymentForm.shipping_city.$error.maxlength">City is greater than 20 characters</li>
+				</ul>
+			</label>
+		</div>
+		<div class="large-4 medium-4 columns">
+			{# STATE #}
+			<label ng-class="{error: paymentForm.shipping_state.$invalid && !paymentForm.shipping_state.$pristine}">State
+				<select class="ff" name="shipping_state" ng-model="paymentInfo.shipping_state"  ng-options="state.name as state.name for state in states" required>
+					<option value="">&nbsp;</option>
+				</select>
+				<ul class="error"  ng-if="paymentForm.shipping_state.$dirty && paymentForm.shipping_state.$invalid">
+					<li class="help-block"  ng-show="paymentForm.shipping_state.$error.required">State required</li>
+				</ul>
+			</label>
+		</div>
+		<div class="large-4 medium-4 columns end">
+			{# ZIP CODE #}
+			<label ng-class="{error: paymentForm.shipping_zip.$invalid && !paymentForm.shipping_zip.$pristine}">Zip Code
+				<input type="text"
+								name="shipping_zip"
+								ng-focus
+								ng-model="paymentInfo.shipping_zip"
+								ng-pattern="/^\d{5,6}(?:[-\s]\d{4})?$/ig"
+								required/>
+
+				<ul class="error"  ng-if="paymentForm.shipping_zip.$dirty && paymentForm.shipping_zip.$invalid && !paymentForm.shipping_zip.$focused">
+					<li class="help-block"  ng-show="paymentForm.shipping_zip.$error.required">Zip code required</li>
+				    <li class="help-block"  ng-show="paymentForm.shipping_zip.$error.pattern">Invalid zip code</li>
+				</ul>
+			</label>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="large-12 columns">
+			{# COUNTRY #}
+			<label>Country
+					<select class="ff" name="shipping_country" ng-model="paymentInfo.shipping_country"  ng-options="country.name as country.name for country in countries" required>
+						<option value="">&nbsp;</option>
+					</select>
+					<ul class="error"  ng-if="paymentForm.shipping_country.$dirty && paymentForm.shipping_country.$invalid">
+						<li class="help-block"  ng-show="paymentForm.shipping_country.$error.required">country required</li>
+					</ul>
+			</label>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="large-12 columns">
+			<label>Phone Number
+				<input type="text"
+								name="shipping_phone"
+								ng-focus
+								ng-model="paymentInfo.shipping_phone"
+								ng-minlength="10"
+								ng-pattern="/^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/ig"
+								required/>
+				<ul class="error" ng-show="paymentForm.shipping_phone.$dirty && paymentForm.shipping_phone.$invalid && !paymentForm.shipping_phone.$focused">
+					<li class="help-block"  ng-show="paymentForm.shipping_phone.$error.required">Phone number required</li>
+		    		<li class="help-block" ng-show="paymentForm.shipping_phone.$invalid || paymentForm.shipping_phone.$error.minlength || paymentForm.shipping_phone.$error.maxlength">Invalid phone number</li>
+				</ul>
+			</label>
+		</div>
+	</div>
+</fieldset>
