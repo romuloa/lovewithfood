@@ -40,6 +40,13 @@ skip_files:
 - ^(.*/)?.*\.scss
 - ^(.*/)?.*\.less
 - ^/docs*
+- ^(.*/)?.*\.md
+- ^(node_modules/.*)
+- ^(.*/)?.*\LICENSE
+- ^(.*/)?.*\.gzip
+- ^(.*/)?.*\.template
+- ^(.*/)?.*\.map
+- ^(.*/)?.*\.1
 
 handlers:
 
