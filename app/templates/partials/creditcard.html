@@ -34,9 +34,9 @@
 								ng-focus />
 
 				<ul class="error"  ng-if="paymentForm.cvv.$dirty && paymentForm.cvv.$invalid && !paymentForm.cvv.$focused">
-					<li class="help-block" ng-show="paymentForm.cvv.$error.pattern">Security code must contain only numbers</li>
-					<li class="help-block" ng-show="paymentForm.cvv.$error.minlength || paymentForm.$error.maxlength">Security code must be 3-4 digits</li>
-					<li class="help-block" ng-show="paymentForm.cvv.$error.required">Security code required</li>
+					<li class="help-block" ng-show="paymentForm.cvv.$error.pattern">Numbers only</li>
+					<li class="help-block" ng-show="paymentForm.cvv.$error.minlength || paymentForm.$error.maxlength">CVV is 3-4 digits</li>
+					<li class="help-block" ng-show="paymentForm.cvv.$error.required">CVV required</li>
 				</ul>
 			</label>
 		</div>
