@@ -28,6 +28,9 @@ label {
 	margin-bottom: 1rem !important;
 	@include font-size(14);
 }
+input[type="checkbox"] + label {
+	display: inline;
+}
 
 
 .payment, .confirmation {

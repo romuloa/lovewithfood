@@ -43,7 +43,7 @@
 	</div>
 	<div class="row">
 		<div class="large-12 medium-12 columns">
-			<label ng-class="{error: (paymentForm.exp_month.$invalid && !paymentForm.exp_month.$pristine) || (!paymentForm.exp_year.$pristine && paymentForm.exp_year.$invalid)}">Expiration Date
+			<label ng-class="{error: (paymentForm.exp_month.$invalid && !paymentForm.exp_month.$pristine) || (!paymentForm.exp_year.$pristine && paymentForm.exp_year.$invalid)}">Expiration Date</label>
 				<div class="row">
 					<div class="large-8 medium-8 columns">
 						{# MONTH DROPDOWN #}
@@ -64,6 +64,6 @@
 					<li  class="help-block" ng-show="paymentForm.exp_year.$error.required">Expiration year required</li>
   								<li  class="help-block" ng-show="paymentForm.exp_month.$error.invalid">Provided expiration date is invalid</li>
 				</ul>
-			</label>
+
 		</div>
 </fieldset>

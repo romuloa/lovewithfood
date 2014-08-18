@@ -7629,19 +7629,24 @@ label {
   margin-bottom: 1.625rem;
 }
 
-/* line 33, ../../../scss/_main.scss */
+/* line 31, ../../../scss/_main.scss */
+input[type="checkbox"] + label {
+  display: inline;
+}
+
+/* line 36, ../../../scss/_main.scss */
 .payment, .confirmation {
   position: relative;
   padding-top: 75px;
 }
 
-/* line 39, ../../../scss/_main.scss */
+/* line 42, ../../../scss/_main.scss */
 .payment header {
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
 }
 
-/* line 45, ../../../scss/_main.scss */
+/* line 48, ../../../scss/_main.scss */
 .confirmation h1 {
   margin-bottom: 0;
 }
